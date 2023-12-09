@@ -8,50 +8,66 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
-import "../view"
+import QtGraphicalEffects 1.0
 
 CoverBackground {
-
-    ColumnLayout {
-        id: layout
+    GridLayout {
         anchors.fill: parent
-        spacing: Theme.paddingMedium
+        anchors.margins: Theme.paddingMedium
+        anchors.bottomMargin: 100 // cover buttons
+        columns: 1 // on Aurora 5 make it 2
 
-        CoverView {
-            Layout.fillWidth: true
-            Layout.preferredHeight: layout.width
+        Image {
+            id: coverImage
 
-            cover: nowPlaying ? nowPlaying.cover : Qt.resolvedUrl()
+            Layout.preferredWidth: Theme.iconSizeExtraLarge
+            Layout.preferredHeight: Theme.iconSizeExtraLarge
+
+            fillMode: Image.PreserveAspectCrop
+            visible: nowPlaying ? true : false
+
+            source: nowPlaying ? nowPlaying.cover : "image://theme/icon-m-share-sign"
         }
 
-        Item {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignTop
-            Label {
-                anchors.fill: parent
-                anchors.leftMargin: Theme.paddingSmall
-                anchors.rightMargin: Theme.paddingSmall
-                verticalAlignment: Text.AlignTop
+        Label {
+            Layout.preferredWidth: parent.width
+            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
 
-                text: nowPlaying ? qsTr("%1 — %2", "station and title").arg(nowPlaying.title).arg(nowPlaying.station.title) : ""
-                font.pixelSize: Theme.fontSizeSmall
-                elide: Text.ElideMiddle
-                maximumLineCount: 1
-            }
+            wrapMode: Text.Wrap
+            font.pixelSize: Theme.fontSizeSmall
+            elide: Text.ElideRight
+            maximumLineCount: 2
+
+            text: nowPlaying ? nowPlaying.station.title : qsTr("Ничего не играет")
         }
 
-        Item {
+        Label {
             Layout.fillHeight: true
-            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width
+            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+
+            wrapMode: Text.Wrap
+            font.pixelSize: Theme.fontSizeTiny
+            elide: Text.ElideMiddle
+
+            text: nowPlaying ? nowPlaying.title : qsTr("Послушайте ваш первый подкаст")
         }
     }
 
     CoverActionList {
-        id: coverAction
+        CoverAction {
+            iconSource: "image://theme/icon-cover-previous-song"
+            onTriggered: player.seek(player.position - 10000)
+        }
 
         CoverAction {
             iconSource: !(player.playbackState === MediaPlayer.PlayingState) ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
             onTriggered: !(player.playbackState === MediaPlayer.PlayingState) ? player.play() : player.pause()
+        }
+
+        CoverAction {
+            iconSource: "image://theme/icon-cover-next-song"
+            onTriggered: player.seek(player.position + 10000)
         }
     }
 }
