@@ -4,14 +4,6 @@
 # 
 
 Name:       com.github.erhoof.aurocast
-
-# >> macros
-# << macros
-
-%{!?qtc_qmake:%define qtc_qmake %qmake}
-%{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
-%{!?qtc_make:%define qtc_make make}
-%{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Podcast Application
 Version:    0.3
 Release:    1
@@ -19,54 +11,30 @@ Group:      Qt/Qt
 License:    MIT OR Apache-2.0
 URL:        https://github.com/erhoof/AuroCast
 Source0:    %{name}-%{version}.tar.bz2
-Source100:  com.github.erhoof.aurocast.yaml
-Requires:   sailfishsilica-qt5 >= 1.0
-Requires:   qt5-qtdeclarative-import-xmllistmodel >= 5.6
-BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
+
+Requires:   sailfishsilica-qt5 >= 0.10.9
+BuildRequires:  pkgconfig(auroraapp)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  desktop-file-utils
 
 %description
 Podcast application with Aurora OS in mind
 
-
 %prep
-%setup -q -n %{name}-%{version}
-
-# >> setup
-# << setup
+%autosetup
 
 %build
-# >> build pre
-# << build pre
-
-%qtc_qmake5 
-
-%qtc_make %{?_smp_mflags}
-
-# >> build post
-# << build post
+%qmake5
+%make_build
 
 %install
-rm -rf %{buildroot}
-# >> install pre
-# << install pre
-%qmake5_install
-
-# >> install post
-# << install post
-
-desktop-file-install --delete-original       \
-  --dir %{buildroot}%{_datadir}/applications             \
-   %{buildroot}%{_datadir}/applications/*.desktop
+%make_install
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}
+%{_bindir}/%{name}
+%defattr(644,root,root,-)
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
-# >> files
-# << files

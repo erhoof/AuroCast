@@ -11,7 +11,10 @@ Name=AuroCast
 # a different app name in German locale (de).
 Name[ru]=Подкасты
 
-[X-Sailjail]
+[X-Application]
 Permissions=Internet;Audio
 OrganizationName=com.github.erhoof
-ApplicationName=AuroCast
+ApplicationName=aurocast
+
+[X-Aurora-Application]
+IconMode=Crop
