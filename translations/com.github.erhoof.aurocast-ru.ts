@@ -4,9 +4,12 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>%1 — %2</source>
-        <comment>station and title</comment>
-        <translation>%1 — %2</translation>
+        <source>Ничего не играет</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Послушайте ваш первый подкаст</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14,10 +17,6 @@
     <message>
         <source>Error: could not fetch station data</source>
         <translation>Ошибка: невозможно загрузить данные</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation>Обновить</translation>
     </message>
 </context>
 <context>
@@ -48,6 +47,14 @@
     <message>
         <source>Unsubscribe</source>
         <translation>Отписаться</translation>
+    </message>
+    <message>
+        <source>Доступно эпизодов: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Эпизоды:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
