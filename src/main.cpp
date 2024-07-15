@@ -10,17 +10,24 @@
 
 #include <auroraapp.h>
 
-
 int main(int argc, char *argv[])
 {
-    // SailfishApp::main() will display "qml/template.qml", if you need more
-    // control over initialization, you can use:
-    //
-    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
-    //   - SailfishApp::createView() to get a new QQuickView * instance
-    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
-    //
-    // To display the view, call "show()" (will show fullscreen on device).
+    // Aurora OS 4
+    // return Aurora::Application::main(argc, argv);
 
-    return Aurora::Application::main(argc, argv);
+    // Aurora OS 5
+    QScopedPointer<QGuiApplication> application(Aurora::Application::application(argc, argv));
+    application->setOrganizationName(QStringLiteral("com.gthub.erhoof"));
+    application->setApplicationName(QStringLiteral("aurocast"));
+
+    QScopedPointer<QQuickView> view(Aurora::Application::createView());
+
+    // Aurora::Application::pathTo(QStringLiteral(...)) doesn't work
+    // ("/usr/share/com.github.erhoof.aurocast/qml/com.github.erhoof.aurocast.qml"
+    // pathToMainQml() -> "Document path '/usr/share/qml/.qml' is outside the workspace directory '/usr/share/com.github.erhoof.aurocast'"
+    //view->setSource(Aurora::Application::PackageFilesLocation + "qml/com.github.erhoof.aurocast.qml");
+    view->setSource(Aurora::Application::pathToMainQml());
+    view->show();
+
+    return application->exec();
 }
