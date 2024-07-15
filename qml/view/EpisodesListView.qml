@@ -30,22 +30,14 @@ SilicaListView {
         EpisodeListElement  {
             id: delegate
             onClicked: {
-                console.log("i am clicked: " + model.title);
-
                 var myUrl = Qt.resolvedUrl(model.enclosure);
-                console.log("myUrl: " + myUrl);
-                console.log("player source: " + player.source);
                 if (player.source.toString() === myUrl.toString()) {
-                    console.log("same url");
                     if (player.playbackState === MediaPlayer.PlayingState) {
                         player.pause();
-                        console.log("paused");
                     } else {
                         player.play();
-                        console.log("play")
                     }
                 } else {
-                    console.log("loading track: " + myUrl);
                     nowPlaying = station.episodes[index];
                     player.source = myUrl;
                     player.seek(0);
@@ -55,14 +47,14 @@ SilicaListView {
         }
     }
 
-    PullDownMenu {
+    /*PullDownMenu {
         MenuItem {
             text: qsTr("Update")
             onClicked: view.station.reload()
         }
         quickSelect: true
         busy: view.station.status == Component.Loading
-    }
+    }*/
 
     VerticalScrollDecorator {}
 

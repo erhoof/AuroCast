@@ -9,55 +9,63 @@ import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
 import "../service"
 
-RowLayout {
+ColumnLayout {
     id: header
+
+    anchors.fill: parent
+    anchors.margins: Theme.paddingMedium
+
+    spacing: Theme.paddingMedium
+
+    Layout.preferredHeight: 480
+    Layout.maximumHeight: 480
+    Layout.minimumHeight: 480
 
     property var station
     property bool subscribed
 
-    Layout.fillWidth: true
-    Layout.preferredHeight: 200
-    Layout.maximumHeight: 200
-    Layout.minimumHeight: 200
-
-    spacing: Theme.paddingLarge
-
-    CoverView {
-        id: stationCover
-
-        Layout.fillHeight: true
-        Layout.maximumWidth: parent.height
-        Layout.preferredWidth: parent.height
-
-        cover: header.station.cover
-    }
-
-    ColumnLayout {
-        Layout.fillHeight: true
+    RowLayout {
+        anchors.fill: parent
         Layout.fillWidth: true
-        // only avaible starting with QtQuick.Layouts 1.3
-        // Layout.margins: Theme.paddingLarge
-        // Layout.topMargin: Theme.paddingMedium
-        // Layout.bottomMargin: Theme.paddingMedium
 
         spacing: Theme.paddingMedium
 
-        /* for spacing */
-        Item { Layout.fillWidth: true; Layout.preferredHeight: 0 }
+        Image {
+            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
 
-        Label {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.preferredWidth: Theme.iconSizeExtraLarge * 1.2
+            Layout.preferredHeight: Theme.iconSizeExtraLarge * 1.2
 
-            text: header.station.title
+            fillMode: Image.PreserveAspectCrop
 
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: Theme.fontSizeMedium
-            color: Theme.primaryColor
-
-            wrapMode: Text.WordWrap
-            truncationMode: TruncationMode.Elide
+            source: header.station.cover
         }
+
+        ColumnLayout {
+            Label {
+                Layout.fillWidth: true
+
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                truncationMode: TruncationMode.Elide
+                font.bold: true
+
+                text: header.station.title
+            }
+
+            Label {
+                Layout.fillHeight: true
+
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.secondaryColor
+
+                text: "iTunes"
+            }
+        }
+    }
+
+    RowLayout {
+        spacing: Theme.paddingMedium
 
         Button {
             text: header.subscribed
@@ -75,8 +83,9 @@ RowLayout {
             }
         }
 
-        /* for spacing */
-        Item { Layout.fillWidth: true; Layout.preferredHeight: 0 }
+        Button {
+            icon.source: "image://theme/icon-s-retweet"
+        }
     }
 
     function _update() {
@@ -93,5 +102,33 @@ RowLayout {
                 header.subscribed = flag;
             }
         });
+    }
+
+    Label {
+        Layout.fillWidth: true
+
+        maximumLineCount: 2
+        wrapMode: Text.Wrap
+        font.pixelSize: Theme.fontSizeSmall
+        elide: Text.ElideMiddle
+
+        text: header.station.description
+    }
+
+    Label {
+        Layout.fillWidth: true
+
+        font.pixelSize: Theme.fontSizeTiny
+        color: Theme.secondaryColor
+
+        text: qsTr("Доступно эпизодов: ") + header.station.episodes.length
+    }
+
+    Label {
+        Layout.fillWidth: true
+
+        font.bold: true
+
+        text: qsTr("Эпизоды:")
     }
 }

@@ -19,10 +19,15 @@ Page {
 
     ColumnLayout {
         anchors.fill: parent
+        anchors.margins: 0
         spacing: 0
 
         StationHeader {
             station: page.station
+        }
+
+        Item {
+            height: 35
         }
 
         EpisodesListView {

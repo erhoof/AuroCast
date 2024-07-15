@@ -37,6 +37,7 @@ CoverBackground {
             font.pixelSize: Theme.fontSizeSmall
             elide: Text.ElideRight
             maximumLineCount: 2
+            color: Theme.primaryColor
 
             text: nowPlaying ? nowPlaying.station.title : qsTr("Ничего не играет")
         }
@@ -49,15 +50,18 @@ CoverBackground {
             wrapMode: Text.Wrap
             font.pixelSize: Theme.fontSizeTiny
             elide: Text.ElideMiddle
+            color: Theme.secondaryColor
 
             text: nowPlaying ? nowPlaying.title : qsTr("Послушайте ваш первый подкаст")
         }
     }
 
     CoverActionList {
+        enabled: nowPlaying && (player.playbackState === MediaPlayer.PlayingState)
+
         CoverAction {
             iconSource: "image://theme/icon-cover-previous-song"
-            onTriggered: player.seek(player.position - 10000)
+            onTriggered: player.seek(player.position - 15000)
         }
 
         CoverAction {
@@ -67,7 +71,20 @@ CoverBackground {
 
         CoverAction {
             iconSource: "image://theme/icon-cover-next-song"
-            onTriggered: player.seek(player.position + 10000)
+            onTriggered: player.seek(player.position + 30000)
         }
+    }
+
+    CoverActionList {
+        enabled: nowPlaying && (player.playbackState === MediaPlayer.PausedState)
+
+        CoverAction {
+            iconSource: "image://theme/icon-cover-play"
+            onTriggered: player.play()
+        }
+    }
+
+    CoverActionList {
+        enabled: !nowPlaying
     }
 }
