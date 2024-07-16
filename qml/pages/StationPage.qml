@@ -12,8 +12,8 @@ import "../model"
 import "../view"
 import "../service"
 
-Page {
-    id: page
+Item {
+    id: stationPage
 
     property var station
 
@@ -23,7 +23,7 @@ Page {
         spacing: 0
 
         StationHeader {
-            station: page.station
+            station: stationPage.station
         }
 
         Item {
@@ -34,7 +34,7 @@ Page {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            station: page.station
+            station: stationPage.station
         }
     }
 }

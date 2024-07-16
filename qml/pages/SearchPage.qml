@@ -6,56 +6,39 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.Layouts 1.1
+import Aurora.Controls 1.0
 import "../view"
 import "../service"
 import "../model"
 
-Page {
-    id: root
+Item {
+    //id: root
 
-    property bool _firstRun: true
+    //property bool _firstRun: true
 
-    onStatusChanged: {
+    /*onStatusChanged: {
         if (_firstRun && status === PageStatus.Active) {
             _firstRun = false;
             view.headerItem.forceActiveFocus();
         }
-    }
+    }*/
 
-    Dialog {
-        id: addByRssUrlDialog
+    AppBar {
+        id: appBarSearch
+        headerText: qsTr("Search")
 
-        canAccept: Qt.resolvedUrl(urlText.text).indexOf("http") === 0
+        AppBarSpacer {}
+        AppBarButton {
+            context: qsTr("RSS")
+            text: qsTr("Добавить по RSS")
+            //icon.source: "image://theme/icon-m-new"
 
-        DialogHeader {
-            acceptText: qsTr("Add")
-        }
-        TextField {
-            id: urlText
-
-            anchors {
-                centerIn: parent
-                leftMargin: Theme.horizontalPageMargin
-                rightMargin: Theme.horizontalPageMargin
+            onClicked: {
+                //splitView.pop(SplitView.Immediate)
+                //splitView.push(Qt.resolvedUrl("SearchPage.qml"))
+                pageStack.push(addByRssUrlDialog)
             }
-            width: parent.width
-
-            label: qsTr("RSS url")
-            placeholderText: label
-            EnterKey.enabled: addByRssUrlDialog.canAccept
-            EnterKey.iconSource: "image://theme/icon-m-enter-next"
-            EnterKey.onClicked: addByRssUrlDialog.accept()
-
-            text: ""
-        }
-
-        acceptDestination: Component {
-            StationPage {
-                station: Dao.emptyStation(this);
-            }
-        }
-        onAcceptPendingChanged: {
-            acceptDestinationInstance.station = Dao.stationFromUrl(acceptDestinationInstance, urlText.text);
         }
     }
 
@@ -63,6 +46,7 @@ Page {
         id: view
 
         anchors.fill: parent
+        anchors.topMargin: appBarSearch.height
 
         header: SearchField {
             width: parent.width
@@ -101,13 +85,41 @@ Page {
         }
     }
 
-    ViewPlaceholder {
-        enabled: listModel.count < 1
-        Button {
-            id: addByRssUrlBtn
-            anchors.centerIn: parent
-            text: qsTr("Add by RSS url")
-            onClicked: pageStack.push(addByRssUrlDialog)
+    Dialog {
+        id: addByRssUrlDialog
+        allowedOrientations: defaultAllowedOrientations
+
+        canAccept: Qt.resolvedUrl(urlText.text).indexOf("http") === 0
+
+        DialogHeader {
+            acceptText: qsTr("Add")
+        }
+        TextField {
+            id: urlText
+
+            anchors {
+                centerIn: parent
+                leftMargin: Theme.horizontalPageMargin
+                rightMargin: Theme.horizontalPageMargin
+            }
+            width: parent.width
+
+            label: qsTr("RSS url")
+            placeholderText: label
+            EnterKey.enabled: addByRssUrlDialog.canAccept
+            EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            EnterKey.onClicked: addByRssUrlDialog.accept()
+
+            text: ""
+        }
+
+        acceptDestination: Component {
+            StationPage {
+                station: Dao.emptyStation(this);
+            }
+        }
+        onAcceptPendingChanged: {
+            acceptDestinationInstance.station = Dao.stationFromUrl(acceptDestinationInstance, urlText.text);
         }
     }
 }

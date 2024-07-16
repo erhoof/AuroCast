@@ -7,8 +7,10 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
+import Aurora.Controls 1.0
 import "../model"
 import "../pages"
+import ".."
 
 /**
  * General StationsListView spans as much space as it could get with `Layout.fill{Height,Width}`
@@ -31,11 +33,15 @@ SilicaListView {
 
     delegate: StationListElement {
         onClicked: {
-            console.log("i am clicked: " + model.title);
             var page = stationPage.createObject(view, {
                 station: view.model.stationAt(index)
             });
-            pageStack.push(page);
+            //splitView.pop(Qt.resolvedUrl("EmptyPage.qml"), SplitView.Immediate)
+            //splitView.pop(Qt.resolvedUrl("StationPage.qml"), SplitView.Immediate)
+            //splitView.pop(SplitView.Immediate)
+            //splitView.pop();
+            //splitView.scrollFirstActiveItemBack(1)
+            splitView.push(page)
         }
     }
     VerticalScrollDecorator {}

@@ -28,6 +28,7 @@ DISTFILES += \
     qml/model/Station.qml \
     qml/model/StationsListModel.qml \
     qml/model/SubscriptionsListModel.qml \
+    qml/pages/EmptyPage.qml \
     qml/pages/SearchPage.qml \
     qml/pages/StationPage.qml \
     qml/pages/SubscriptionsPage.qml \

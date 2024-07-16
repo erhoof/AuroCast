@@ -13,6 +13,13 @@
     </message>
 </context>
 <context>
+    <name>EmptyPage</name>
+    <message>
+        <source>No podcast is selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EpisodesListView</name>
     <message>
         <source>Error: could not fetch station data</source>
@@ -34,8 +41,16 @@
         <translation>Добавить</translation>
     </message>
     <message>
-        <source>Add by RSS url</source>
-        <translation>Добавить по адресу RSS</translation>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RSS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Добавить по RSS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -80,12 +95,12 @@
         <translation>Подписки</translation>
     </message>
     <message>
-        <source>Search / Add RSS</source>
-        <translation>Поиск / Добавить RSS</translation>
-    </message>
-    <message>
         <source>Update</source>
         <translation>Обновить</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Добавить</translation>
     </message>
 </context>
 </TS>
