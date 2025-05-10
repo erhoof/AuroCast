@@ -15,81 +15,54 @@ BackgroundItem {
     property bool isCurrent: Qt.resolvedUrl(model.enclosure).toString() === player.source.toString()
 
     width: parent.width
-    //width: parent ? parent.width : undefined
-    height: 280
+    height: 220
 
-    //anchors.fill: parent
-
-    ColumnLayout {
-        //spacing: Theme.paddingMedium
-        //width: parent.width
+    Rectangle {
         anchors.fill: parent
-        anchors.margins: Theme.paddingMedium
+        color: Qt.rgba(1, 1, 1, 0.2)
+        radius: 8
 
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+        Column {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors {
+                left: parent.left
+                right: parent.right
+                margins: Theme.paddingMedium
+            }
 
-            spacing: Theme.paddingMedium
-            anchors.margins: Theme.paddingMedium
+            Text {
+                id: titleText
+                width: parent.width
+                text: model.title
+                color: Theme.primaryColor
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                maximumLineCount: 2
+                elide: Text.ElideRight
+            }
 
-            Image {
-                //Layout.minimumWidth: parent.height
-                //Layout.preferredWidth: parent.height
-                //Layout.maximumWidth: parent.height
-                //Layout.minimumHeight: parent.height
-                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                Layout.preferredWidth: Theme.iconSizeLarge
-                Layout.preferredHeight: Theme.iconSizeLarge
+            Text {
+                width: parent.width
+                text: stripHtmlTags(model.description)
+                color: Theme.secondaryColor
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                maximumLineCount: 4 - titleText.lineCount
+                elide: Text.ElideRight
+                font.pixelSize: Theme.fontSizeSmall
+                textFormat: Text.PlainText
 
-                fillMode: Image.PreserveAspectCrop
-
-                source: model.cover
+                function stripHtmlTags(html) {
+                    html = html.replace(/<br\s*\/?>/gi, "");
+                    html = html.replace(/<\/?p\s*\/?>/gi, "");
+                    html = html.replace(/<\/?strong\s*\/?>/gi, "");
+                    return html
+                }
             }
 
             Label {
-                Layout.fillWidth: true
-                //Layout.fillHeight: true
-                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-
-                color: Theme.primaryColor
-                font.pixelSize: Theme.fontSizeSmall
-                maximumLineCount: 4
-                wrapMode: Text.Wrap
-                elide: Text.ElideMiddle
-
-                text: model.title
+                font.pixelSize: Theme.fontSizeExtraSmall
+                text: Qt.formatDateTime(new Date(model.pubDate), "dd MMMM yyyy, hh:mm")
+                color: Theme.secondaryHighlightColor
             }
         }
-
-        Label {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
-
-            //width: parent.width
-            color: Theme.secondaryColor
-            wrapMode: Text.WordWrap
-            elide: Text.ElideRight
-            font.pixelSize: Theme.fontSizeTiny
-            maximumLineCount: 4
-
-            text: model.description
-        }
-
-        /*Label {
-            Layout.preferredHeight: Theme.iconSizeLarge
-
-            //Layout.fillWidth: true
-            //Layout.fillHeight: true
-
-            color: Theme.secondaryColor
-            //wrapMode: Text.WordWrap
-            //truncationMode: TruncationMode.Elide
-            font.pixelSize: Theme.fontSizeTiny
-            maximumLineCount: 4
-
-            text: model.description
-        }*/
     }
 }

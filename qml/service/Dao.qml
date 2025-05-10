@@ -76,6 +76,7 @@ Item {
 
             console.log("Dao: subscriptions as Station objects: " + results);
             callback(results);
+            console.log("Duo: Callback finished");
         });
     }
 
@@ -90,7 +91,10 @@ Item {
                 VALUES(?)
             ", [feed_url]);
         });
+
+        console.log("signal subscr call");
         subscription(feed_url, true);
+        console.log("signal subscr call done");
     }
 
     /**
@@ -132,17 +136,11 @@ Item {
         Station {}
     }
 
-    /**
-     * Create new `Station` object from given RSS feed URL.
-     */
     function stationFromUrl(parent, feed_url) {
         console.log("Dao: creating station from url:", feed_url);
         return stationComponent.createObject(parent, {feed_url: feed_url});
     }
 
-    /**
-     * Create empty `Station` object without any data.
-     */
     function emptyStation(parent) {
         return stationComponent.createObject(parent);
     }

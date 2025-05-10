@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=ru.erhoof.Air
+Exec=/usr/bin/ru.erhoof.Air
+Name=Air
+Name[ru]=Эфир
+
+[X-Application]
+Permissions=Internet;Audio
+OrganizationName=ru.erhoof
+ApplicationName=Air
+
+[X-Aurora-Application]
+IconMode=Crop

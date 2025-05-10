@@ -20,7 +20,10 @@ SilicaListView {
 
     id: view
 
-    clip: true
+    //clip: true
+
+    height: contentHeight
+    spacing: Theme.paddingMedium
 
     model: EpisodesListModel {
         station: view.station
@@ -56,7 +59,7 @@ SilicaListView {
         busy: view.station.status == Component.Loading
     }*/
 
-    VerticalScrollDecorator {}
+    //VerticalScrollDecorator {}
 
     /*ViewPlaceholder {
         id: loadingPlaceholder
@@ -80,7 +83,7 @@ SilicaListView {
         }
     }*/
 
-    ViewPlaceholder {
+    /*ViewPlaceholder {
         id: errorPlaceholder
         enabled: station.status === Component.Error
         ColumnLayout {
@@ -98,5 +101,5 @@ SilicaListView {
                 text: qsTr("Error: could not fetch station data");
             }
         }
-    }
+    }*/
 }

@@ -65,7 +65,9 @@ ListModel {
             description:   station.description,
             cover:         station.cover.toString(),
             feed_url:      station.feed_url.toString(),
-            episodesCount: station.episodes.length
+            episodesCount: station.episodes.length,
+            author:        station.aurhor,
+            copyright:     station.copyright
         };
     }
 }

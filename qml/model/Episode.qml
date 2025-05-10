@@ -13,5 +13,5 @@ Item {
     property bool ownCover
     property url cover
     property url enclosure
-    property date pubDate
+    property string pubDate
 }

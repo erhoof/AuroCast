@@ -8,6 +8,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
 import Aurora.Controls 1.0
+
 import "../model"
 import "../pages"
 import ".."
@@ -20,15 +21,18 @@ import ".."
  *
  * Check `StationListElement`'s documentation for the delegate's expectactions about the model.
  */
-SilicaListView {
+ListView {
     id: view
 
-    Layout.fillHeight: true
-    Layout.fillWidth: true
+    spacing: Theme.paddingLarge
 
     Component {
         id: stationPage
         StationPage {}
+    }
+
+    VerticalScrollDecorator {
+        anchors.rightMargin: -Theme.horizontalPageMargin
     }
 
     delegate: StationListElement {
@@ -36,13 +40,7 @@ SilicaListView {
             var page = stationPage.createObject(view, {
                 station: view.model.stationAt(index)
             });
-            //splitView.pop(Qt.resolvedUrl("EmptyPage.qml"), SplitView.Immediate)
-            //splitView.pop(Qt.resolvedUrl("StationPage.qml"), SplitView.Immediate)
-            //splitView.pop(SplitView.Immediate)
-            //splitView.pop();
-            //splitView.scrollFirstActiveItemBack(1)
-            splitView.push(page)
+            pageStack.push(page);
         }
     }
-    VerticalScrollDecorator {}
 }

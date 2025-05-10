@@ -1,11 +1,13 @@
 /*
   SPDX-FileCopyrightText: 2017, 2022 ivan tkachenko <me@ratijas.tk>
+  SPDX-FileCopyrightText: 2023-2025 Pavel Bibichenko <b7086163@gmail.com>
 
   SPDX-License-Identifier: MIT OR Apache-2.0
 */
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: view
@@ -15,26 +17,6 @@ Item {
     property bool highlighted: false
 
     states: [
-        State {
-            name: "loading"
-            when: view.status === Image.Loading
-            PropertyChanges {
-                target: coverImage
-                opacity: 0
-            }
-        },
-        State {
-            name: "ready"
-            when: view.status === Image.Ready
-            PropertyChanges {
-                target: coverImage
-                opacity: 1
-            }
-            PropertyChanges {
-                target: coverDefault
-                opacity: 0
-            }
-        },
         State {
             name: "error"
             when: view.status === Image.Error
@@ -85,6 +67,15 @@ Item {
         source: view.cover
 
         opacity: 1
+
+        layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Rectangle {
+                width: coverImage.width
+                height: coverImage.height
+                radius: 10
+            }
+        }
     }
 
     BusyIndicator {
@@ -94,20 +85,5 @@ Item {
                 ? BusyIndicatorSize.Medium :
                   BusyIndicatorSize.Large
         running: (view.cover.toString() !== "") && (status !== Image.Error) && (status !== Image.Ready)
-    }
-
-    // in case station's cover can not be loaded
-    Image {
-        id: coverDefault
-
-        anchors.fill: view
-
-        // TODO: add default podcast cover
-        source: ("image://theme/icon-l-play?" +
-                 (highlighted
-                  ? Theme.highlightColor
-                  : Theme.primaryColor))
-
-        opacity: 1
     }
 }

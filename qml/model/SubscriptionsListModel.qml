@@ -8,17 +8,18 @@ import QtQuick 2.0
 import "../service"
 
 StationsListModel {
-
-    Component.onCompleted: {
-        Dao.subscription.connect(function(feed_url, subscribed) {
-            refresh();
-        });
-        refresh();
-    }
-
     function refresh() {
         Dao.subscriptions(this, function(subscriptions) {
             setStations(subscriptions);
         });
+    }
+
+    function refresh_impl(feed_url, subscribed) {
+        refresh();
+    }
+
+    Component.onCompleted: {
+        Dao.subscription.connect(refresh_impl);
+        refresh();
     }
 }

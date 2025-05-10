@@ -1,5 +1,6 @@
 /*
   SPDX-FileCopyrightText: 2017, 2022 ivan tkachenko <me@ratijas.tk>
+  SPDX-FileCopyrightText: 2023-2025 Pavel Bibichenko <b7086163@gmail.com>
 
   SPDX-License-Identifier: MIT OR Apache-2.0
 */
@@ -57,7 +58,7 @@ CoverBackground {
     }
 
     CoverActionList {
-        enabled: nowPlaying && (player.playbackState === MediaPlayer.PlayingState)
+        //enabled: nowPlaying && (player.playbackState === MediaPlayer.PlayingState)
 
         CoverAction {
             iconSource: "image://theme/icon-cover-previous-song"
@@ -76,7 +77,7 @@ CoverBackground {
     }
 
     CoverActionList {
-        enabled: nowPlaying && (player.playbackState === MediaPlayer.PausedState)
+        //enabled: nowPlaying && (player.playbackState === MediaPlayer.PausedState)
 
         CoverAction {
             iconSource: "image://theme/icon-cover-play"

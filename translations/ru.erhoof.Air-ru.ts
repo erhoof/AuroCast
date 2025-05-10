@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="ru_RU" sourcelanguage="en">
 <context>
     <name>CoverPage</name>
     <message>
@@ -20,55 +20,25 @@
     </message>
 </context>
 <context>
-    <name>EpisodesListView</name>
-    <message>
-        <source>Error: could not fetch station data</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SearchPage</name>
     <message>
-        <source>RSS url</source>
+        <source>Podcast name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search iTunes Store</source>
+        <source>Nothing to show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add</source>
+        <source>Input or change search query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search</source>
+        <source>Add by RSS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>RSS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Добавить по RSS</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StationHeader</name>
-    <message>
-        <source>Subscribe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unsubscribe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Доступно эпизодов: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Эпизоды:</source>
+        <source>Input RSS Link</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -76,28 +46,49 @@
     <name>StationListElement</name>
     <message>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка…</translation>
     </message>
     <message numerus="yes">
-        <source>%1 episodes</source>
+        <source>Episodes: %1</source>
         <comment>number of podcast&apos;s episodes</comment>
-        <translation>
-            <numerusform>%1 episode</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>StationPage</name>
+    <message>
+        <source>Unsubscribe</source>
+        <translation type="unfinished">Отписаться</translation>
+    </message>
+    <message>
+        <source>Subscribe</source>
+        <translation type="unfinished">Подписаться</translation>
+    </message>
+    <message>
+        <source>Episodes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SubscriptionsPage</name>
     <message>
-        <source>Subscriptions</source>
+        <source>Air</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>Subscriptions list is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add</source>
+        <source>Search for some podcasts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,5 +1,5 @@
 
-TARGET = com.github.erhoof.aurocast
+TARGET = ru.erhoof.Air
 
 CONFIG += \
     c++14 \
@@ -11,15 +11,15 @@ SOURCES += src/main.cpp
 CONFIG += auroraapp_i18n
 
 TRANSLATIONS += \
-    translations/com.github.erhoof.aurocast.ts \
-    translations/com.github.erhoof.aurocast-ru.ts \
+    translations/ru.erhoof.Air.ts \
+    translations/ru.erhoof.Air-ru.ts \
 
 DISTFILES += \
-    icons/108x108/com.github.erhoof.aurocast.png \
-    icons/128x128/com.github.erhoof.aurocast.png \
-    icons/172x172/com.github.erhoof.aurocast.png \
-    icons/256x256/com.github.erhoof.aurocast.png \
-    icons/86x86/com.github.erhoof.aurocast.png \
+    icons/108x108/ru.erhoof.Air.png \
+    icons/128x128/ru.erhoof.Air.png \
+    icons/172x172/ru.erhoof.Air.png \
+    icons/256x256/ru.erhoof.Air.png \
+    icons/86x86/ru.erhoof.Air.png \
     meta/database.md \
     meta/schema.sql \
     qml/model/Episode.qml \
@@ -41,8 +41,8 @@ DISTFILES += \
     qml/view/StationHeader.qml \
     qml/view/StationListElement.qml \
     qml/view/StationsListView.qml \
-    qml/com.github.erhoof.aurocast.qml \
-    rpm/com.github.erhoof.aurocast.spec \
-    rpm/com.github.erhoof.aurocast.yaml
+    qml/ru.erhoof.Air.qml \
+    rpm/ru.erhoof.Air.spec \
+    rpm/ru.erhoof.Air.yaml
 
 AURORAAPP_ICONS = 86x86 108x108 128x128 172x172

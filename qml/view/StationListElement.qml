@@ -8,6 +8,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
 import Aurora.Controls 1.0
+import QtGraphicalEffects 1.0
+
 import "../pages"
 
 BackgroundItem {
@@ -18,7 +20,7 @@ BackgroundItem {
 
     RowLayout {
         anchors.fill: parent
-        spacing: Theme.paddingMedium
+        spacing: Theme.paddingLarge
 
         CoverView {
             Layout.minimumWidth: parent.height
@@ -53,7 +55,10 @@ BackgroundItem {
 
                 Layout.fillWidth: true
 
-                text: model.episodesCount ? qsTr("%1 episodes", "number of podcast's episodes", model.episodesCount).arg(model.episodesCount) : qsTr("Loading...")
+                text: model.episodesCount ?
+                    qsTr("Episodes: %1",
+                         "number of podcast's episodes", model.episodesCount).arg(model.episodesCount) :
+                    qsTr("Loading...")
 
                 color: element.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeSmall

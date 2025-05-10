@@ -1,3 +1,9 @@
+/*
+  SPDX-FileCopyrightText: 2023-2025 Pavel Bibichenko <b7086163@gmail.com>
+
+  SPDX-License-Identifier: MIT OR Apache-2.0
+*/
+
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0

@@ -12,46 +12,15 @@ import "../view"
 import "../service"
 import "../model"
 
-Item {
-    //id: root
-
-    //property bool _firstRun: true
-
-    /*onStatusChanged: {
-        if (_firstRun && status === PageStatus.Active) {
-            _firstRun = false;
-            view.headerItem.forceActiveFocus();
-        }
-    }*/
-
+Page {
     AppBar {
         id: appBarSearch
-        headerText: qsTr("Search")
 
-        AppBarSpacer {}
-        AppBarButton {
-            context: qsTr("RSS")
-            text: qsTr("Добавить по RSS")
-            //icon.source: "image://theme/icon-m-new"
+        AppBarSearchField {
+            id: searchField
+            placeholderText: qsTr("Podcast name")
 
-            onClicked: {
-                //splitView.pop(SplitView.Immediate)
-                //splitView.push(Qt.resolvedUrl("SearchPage.qml"))
-                pageStack.push(addByRssUrlDialog)
-            }
-        }
-    }
-
-    StationsListView {
-        id: view
-
-        anchors.fill: parent
-        anchors.topMargin: appBarSearch.height
-
-        header: SearchField {
-            width: parent.width
-
-            placeholderText: qsTr("Search iTunes Store")
+            Component.onCompleted: focus = true
 
             EnterKey.enabled: text.length > 0
             EnterKey.iconSource: "image://theme/icon-m-enter-next"
@@ -65,7 +34,8 @@ Item {
                 // pass callback
                 var callback = function(results) {
                     // parse results, push parsed results into list model and refresh page
-                    listModel.setStations(results.stations);
+                    searchListModel.setStations(results.stations);
+                    placeholderView.visible = !results.stations.length
                 };
                 ITunes.search(query, callback);
             }
@@ -77,12 +47,49 @@ Item {
             }
         }
 
+        AppBarButton {
+            icon.source: "image://theme/icon-m-website"
+            onClicked: {
+                pageStack.push(addByRssUrlDialog)
+            }
+        }
+    }
+
+    SilicaFlickable {
+        id: placeholderView
+        anchors.fill: parent
+
+        visible: true
+
+        ViewPlaceholder {
+            anchors.centerIn: parent
+
+            enabled: true
+            text: qsTr("Nothing to show")
+            hintText: qsTr("Input or change search query")
+        }
+    }
+
+    StationsListModel {
+        id: searchListModel
+    }
+
+    StationsListView {
+        id: view
+
+        anchors {
+            top: appBarSearch.bottom
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+
+            margins: Theme.horizontalPageMargin
+        }
+
         // prevent newly added list delegates from stealing focus away from the search field
         currentIndex: -1
 
-        model: StationsListModel {
-            id: listModel
-        }
+        model: searchListModel
     }
 
     Dialog {
@@ -92,20 +99,21 @@ Item {
         canAccept: Qt.resolvedUrl(urlText.text).indexOf("http") === 0
 
         DialogHeader {
-            acceptText: qsTr("Add")
+            id: dialogHeader
+            acceptText: qsTr("Add by RSS")
         }
+
         TextField {
             id: urlText
 
             anchors {
-                centerIn: parent
+                top: dialogHeader.bottom
                 leftMargin: Theme.horizontalPageMargin
                 rightMargin: Theme.horizontalPageMargin
             }
             width: parent.width
 
-            label: qsTr("RSS url")
-            placeholderText: label
+            placeholderText: qsTr("Input RSS Link")
             EnterKey.enabled: addByRssUrlDialog.canAccept
             EnterKey.iconSource: "image://theme/icon-m-enter-next"
             EnterKey.onClicked: addByRssUrlDialog.accept()
@@ -118,6 +126,7 @@ Item {
                 station: Dao.emptyStation(this);
             }
         }
+
         onAcceptPendingChanged: {
             acceptDestinationInstance.station = Dao.stationFromUrl(acceptDestinationInstance, urlText.text);
         }

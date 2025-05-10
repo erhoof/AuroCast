@@ -12,6 +12,8 @@ Item {
 
     property string title
     property string description
+    property string author
+    property string copyright
     property url cover
     property url feed_url
     property var episodes: []
@@ -81,6 +83,44 @@ Item {
             name: "cover"
             query: "*[name()='itunes:image']/@href/string()"
         }
+
+        XmlRole {
+            name: "author"
+            query: "*[name()='itunes:author']/string()"
+        }
+
+        XmlRole {
+            name: "copyright"
+            query: "copyright/string()"
+        }
+    }
+
+    function extractEpisodes() {
+        if (episodesModel.count !== 0) {
+            episodes = []
+            for (var i = 0; i < episodesModel.count; i++) {
+                var episodeModel = episodesModel.get(i);
+
+                if (episodeModel.enclosure) {
+                    episodes.push(extractEpisode(episodeModel));
+                }
+            }
+            _episodesLoaded = true;
+            _checkStatusReady();
+        } else {
+            _errorHandler();
+        }
+    }
+
+    function extractEpisode(model) {
+        var episode = episodeFromRawParts(
+            model.title,
+            model.description,
+            model.cover,
+            model.enclosure,
+            model.pubDate
+        );
+        return episode;
     }
 
     XmlListModel {
@@ -88,7 +128,7 @@ Item {
 
         onStatusChanged: {
             if (episodesModel.status === XmlListModel.Ready) {
-                _extractEpisodes();
+                extractEpisodes();
             } else if (episodesModel.status === XmlListModel.Error) {
                 _errorHandler();
             }
@@ -131,6 +171,8 @@ Item {
             if (cover.toString() === "") {
                 cover = model.cover;
             }
+            author = model.author;
+            copyright = model.copyright;
 
             _stationLoaded = true;
             _checkStatusReady();
@@ -138,34 +180,6 @@ Item {
         } else {
             _errorHandler();
         }
-    }
-
-    function _extractEpisodes() {
-        if (episodesModel.count !== 0) {
-            episodes = []
-            for (var i = 0; i < episodesModel.count; i++) {
-                var episodeModel = episodesModel.get(i);
-
-                if (episodeModel.enclosure) {
-                    episodes.push(_extractEpisode(episodeModel));
-                }
-            }
-            _episodesLoaded = true;
-            _checkStatusReady();
-        } else {
-            _errorHandler();
-        }
-    }
-
-    function _extractEpisode(model) {
-        var episode = episodeFromRawParts(
-            model.title,
-            model.description,
-            model.cover,
-            model.enclosure,
-            model.pubDate
-        );
-        return episode;
     }
 
     Component {

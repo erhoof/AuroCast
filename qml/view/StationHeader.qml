@@ -7,24 +7,54 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
+import QtGraphicalEffects 1.0
+
 import "../service"
 
 ColumnLayout {
     id: header
 
     anchors.fill: parent
-    anchors.margins: Theme.paddingMedium
+    anchors.margins: Theme.horizontalPageMargin
 
-    spacing: Theme.paddingMedium
+    spacing: Theme.paddingLarge
 
-    Layout.preferredHeight: 480
-    Layout.maximumHeight: 480
-    Layout.minimumHeight: 480
+    //Layout.preferredHeight: 480
+    //Layout.maximumHeight: 480
+    //Layout.minimumHeight: 480
 
     property var station
     property bool subscribed
 
-    RowLayout {
+    Column {
+        id: column
+        width: parent.width - Theme.horizontalPageMargin
+        spacing: Theme.paddingMedium
+        clip: true
+
+        Image {
+            id: image
+            anchors.horizontalCenter: parent.horizontalCenter
+            source: station.cover
+
+            layer.enabled: true
+            layer.effect: OpacityMask {
+                maskSource: Rectangle {
+                    width: image.width
+                    height: image.height
+                    radius: 10
+                }
+            }
+
+            BusyIndicator {
+                size: BusyIndicatorSize.Medium
+                anchors.centerIn: image
+                running: image.status != Image.Ready
+            }
+        }
+    }
+
+    /*RowLayout {
         anchors.fill: parent
         Layout.fillWidth: true
 
@@ -122,13 +152,5 @@ ColumnLayout {
         color: Theme.secondaryColor
 
         text: qsTr("Доступно эпизодов: ") + header.station.episodes.length
-    }
-
-    Label {
-        Layout.fillWidth: true
-
-        font.bold: true
-
-        text: qsTr("Эпизоды:")
-    }
+    }*/
 }
