@@ -5,41 +5,41 @@
     <name>CoverPage</name>
     <message>
         <source>Nothing is playing</source>
-        <translation type="unfinished"></translation>
+        <translation>Ничего не играет</translation>
     </message>
     <message>
         <source>Play your first podcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Включите свой первый подкаст</translation>
     </message>
 </context>
 <context>
     <name>EmptyPage</name>
     <message>
         <source>No podcast is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Подкаст не выбран</translation>
     </message>
 </context>
 <context>
     <name>SearchPage</name>
     <message>
         <source>Podcast name</source>
-        <translation type="unfinished"></translation>
+        <translation>Название подкаста</translation>
     </message>
     <message>
         <source>Nothing to show</source>
-        <translation type="unfinished"></translation>
+        <translation>Нечего отобразить</translation>
     </message>
     <message>
         <source>Input or change search query</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите или измените запрос</translation>
     </message>
     <message>
         <source>Add by RSS</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить по RSS</translation>
     </message>
     <message>
         <source>Input RSS Link</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите RSS ссылку</translation>
     </message>
 </context>
 <context>
@@ -51,10 +51,10 @@
     <message numerus="yes">
         <source>Episodes: %1</source>
         <comment>number of podcast&apos;s episodes</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Эпизодов: %1</numerusform>
+            <numerusform>Эпизодов: %1</numerusform>
+            <numerusform>Эпизодов: %1</numerusform>
         </translation>
     </message>
 </context>
@@ -62,34 +62,34 @@
     <name>StationPage</name>
     <message>
         <source>Unsubscribe</source>
-        <translation type="unfinished">Отписаться</translation>
+        <translation>Отписаться</translation>
     </message>
     <message>
         <source>Subscribe</source>
-        <translation type="unfinished">Подписаться</translation>
+        <translation>Подписаться</translation>
     </message>
     <message>
         <source>Episodes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Эпизоды:</translation>
     </message>
     <message>
         <source>Copyright:</source>
-        <translation type="unfinished"></translation>
+        <translation>Владелец:</translation>
     </message>
 </context>
 <context>
     <name>SubscriptionsPage</name>
     <message>
         <source>Subscriptions list is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Список подписок пуст</translation>
     </message>
     <message>
         <source>Search for some podcasts</source>
-        <translation type="unfinished"></translation>
+        <translation>Найдите первый подкаст</translation>
     </message>
     <message>
         <source>On Air</source>
-        <translation type="unfinished"></translation>
+        <translation>Эфир</translation>
     </message>
 </context>
 </TS>
