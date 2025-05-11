@@ -15,22 +15,53 @@ CoverBackground {
     GridLayout {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
-        anchors.bottomMargin: 100 // cover buttons
+        anchors.topMargin: 0
+        anchors.bottomMargin: 120 // cover buttons
         columns: 1 // on Aurora 5 make it 2
 
-        Image {
+        Rectangle {
+            Layout.preferredWidth: Theme.iconSizeLarge
+            Layout.preferredHeight: Theme.iconSizeLarge
+            color: "transparent"
+            visible: nowPlaying ? true : false
+            Image {
+                id: episodeImage
+                source: nowPlaying ? nowPlaying.cover : "" //episode.ownCover ? episode.cover : station.cover
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectCrop
+
+                layer.enabled: true
+                layer.effect: OpacityMask {
+                    maskSource: Rectangle {
+                        width: episodeImage.width
+                        height: episodeImage.height
+                        radius: 10
+                    }
+                }
+
+                BusyIndicator {
+                    size: BusyIndicatorSize.Medium
+                    anchors.centerIn: episodeImage
+                    running: episodeImage.status != Image.Ready
+                }
+            }
+        }
+
+
+        /*Image {
             id: coverImage
 
-            Layout.preferredWidth: Theme.iconSizeExtraLarge
-            Layout.preferredHeight: Theme.iconSizeExtraLarge
+            Layout.preferredWidth: Theme.iconSizeLarge
+            Layout.preferredHeight: Theme.iconSizeLarge
 
             fillMode: Image.PreserveAspectCrop
             visible: nowPlaying ? true : false
 
             source: nowPlaying ? nowPlaying.cover : "image://theme/icon-m-share-sign"
-        }
+        }*/
 
         Label {
+            id: titleLabel
             Layout.preferredWidth: parent.width
             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
 
@@ -40,7 +71,7 @@ CoverBackground {
             maximumLineCount: 2
             color: Theme.primaryColor
 
-            text: nowPlaying ? nowPlaying.station.title : qsTr("Ничего не играет")
+            text: nowPlaying ? nowPlaying.station.title : qsTr("Nothing is playing")
         }
 
         Label {
@@ -52,13 +83,14 @@ CoverBackground {
             font.pixelSize: Theme.fontSizeTiny
             elide: Text.ElideMiddle
             color: Theme.secondaryColor
+            maximumLineCount: 4 - titleLabel.lineCount
 
-            text: nowPlaying ? nowPlaying.title : qsTr("Послушайте ваш первый подкаст")
+            text: nowPlaying ? nowPlaying.title : qsTr("Play your first podcast")
         }
     }
 
     CoverActionList {
-        //enabled: nowPlaying && (player.playbackState === MediaPlayer.PlayingState)
+        enabled: nowPlaying && (player.playbackState === MediaPlayer.PlayingState)
 
         CoverAction {
             iconSource: "image://theme/icon-cover-previous-song"
@@ -77,7 +109,7 @@ CoverBackground {
     }
 
     CoverActionList {
-        //enabled: nowPlaying && (player.playbackState === MediaPlayer.PausedState)
+        enabled: nowPlaying && (player.playbackState === MediaPlayer.PausedState)
 
         CoverAction {
             iconSource: "image://theme/icon-cover-play"

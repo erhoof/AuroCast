@@ -10,7 +10,7 @@ import QtQuick.LocalStorage 2.0
 import "../model"
 
 Item {
-    property string dbName: "SailcastDatabase"
+    property string dbName: "OnAirDatabase"
     property var database
 
     // is a hack / workaround for Connections {}

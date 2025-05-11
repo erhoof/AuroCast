@@ -4,11 +4,11 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>Ничего не играет</source>
+        <source>Nothing is playing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Послушайте ваш первый подкаст</source>
+        <source>Play your first podcast</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -80,15 +80,15 @@
 <context>
     <name>SubscriptionsPage</name>
     <message>
-        <source>Air</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Subscriptions list is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search for some podcasts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On Air</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

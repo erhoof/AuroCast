@@ -18,14 +18,14 @@ int main(int argc, char *argv[])
     // Aurora OS 5
     QScopedPointer<QGuiApplication> application(Aurora::Application::application(argc, argv));
     application->setOrganizationName(QStringLiteral("ru.erhoof"));
-    application->setApplicationName(QStringLiteral("Air"));
+    application->setApplicationName(QStringLiteral("On Air"));
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
 
     // Aurora::Application::pathTo(QStringLiteral(...)) doesn't work
-    // ("/usr/share/ru.erhoof.Air/qml/ru.erhoof.Air.qml"
-    // pathToMainQml() -> "Document path '/usr/share/qml/.qml' is outside the workspace directory '/usr/share/ru.erhoof.Air'"
-    //view->setSource(Aurora::Application::PackageFilesLocation + "qml/ru.erhoof.Air.qml");
+    // ("/usr/share/ru.erhoof.onair/qml/ru.erhoof.onair.qml"
+    // pathToMainQml() -> "Document path '/usr/share/qml/.qml' is outside the workspace directory '/usr/share/ru.erhoof.onair'"
+    //view->setSource(Aurora::Application::PackageFilesLocation + "qml/ru.erhoof.onair.qml");
     view->setSource(Aurora::Application::pathToMainQml());
     view->show();
 

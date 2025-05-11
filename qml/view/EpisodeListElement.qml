@@ -60,7 +60,7 @@ BackgroundItem {
 
             Label {
                 font.pixelSize: Theme.fontSizeExtraSmall
-                text: Qt.formatDateTime(new Date(model.pubDate), "dd MMMM yyyy, hh:mm")
+                text: Qt.formatDateTime(new Date(model.pubDate), "dd MMMM yyyy")
                 color: Theme.secondaryHighlightColor
             }
         }

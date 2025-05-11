@@ -8,9 +8,11 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtMultimedia 5.0
 import Sailfish.Silica 1.0
+
 import "../model"
 import "../view"
 import "../service"
+import "../pages"
 
 SilicaListView {
     /**
@@ -29,23 +31,34 @@ SilicaListView {
         station: view.station
     }
 
+    Component {
+        id: playerPage
+        PlayerPage {}
+    }
+
     delegate: Component {
         EpisodeListElement  {
             id: delegate
             onClicked: {
                 var myUrl = Qt.resolvedUrl(model.enclosure);
                 if (player.source.toString() === myUrl.toString()) {
-                    if (player.playbackState === MediaPlayer.PlayingState) {
-                        player.pause();
+                    /*if (player.playbackState === MediaPlayer.PlayingState) {
+                        //player.pause();
                     } else {
                         player.play();
-                    }
+                    }*/
                 } else {
                     nowPlaying = station.episodes[index];
                     player.source = myUrl;
                     player.seek(0);
                     player.play();
                 }
+
+                var page = playerPage.createObject(view, {
+                    station: view.station,
+                    episode: model,
+                });
+                pageStack.push(page);
             }
         }
     }

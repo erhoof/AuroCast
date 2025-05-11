@@ -1,5 +1,6 @@
 /*
   SPDX-FileCopyrightText: 2017, 2022 ivan tkachenko <me@ratijas.tk>
+  SPDX-FileCopyrightText: 2023-2025 Pavel Bibichenko <b7086163@gmail.com>
 
   SPDX-License-Identifier: MIT OR Apache-2.0
 */
@@ -20,7 +21,7 @@ Page {
 
     AppBar {
         id: header
-        headerText: qsTr("Air")
+        headerText: qsTr("On Air")
 
         AppBarSpacer {}
 
