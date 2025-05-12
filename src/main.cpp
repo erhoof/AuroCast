@@ -4,9 +4,7 @@
   SPDX-License-Identifier: MIT OR Apache-2.0
 */
 
-#ifdef QT_QML_DEBUG
 #include <QtQuick>
-#endif
 
 #include <auroraapp.h>
 
