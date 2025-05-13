@@ -1,5 +1,5 @@
 /*
-  SPDX-FileCopyrightText: 2017, 2022 ivan tkachenko <me@ratijas.tk>
+  SPDX-FileCopyrightText: 2017, 2022 ivan tkachenko <me@ratijas.me>
 
   SPDX-License-Identifier: MIT OR Apache-2.0
 */
